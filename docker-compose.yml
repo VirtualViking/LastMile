@@ -7,9 +7,9 @@ services:
       POSTGRES_USER: ultimamilla
       POSTGRES_PASSWORD: ultimamilla
     ports:
-      - "5432:5432"
+      - "5440:5432"
     volumes:
-      - nucleo_pgdata:/var/lib/postgresql/data
+      - nucleo_pgdata:/var/lib/postgresql
 
 volumes:
   nucleo_pgdata:
