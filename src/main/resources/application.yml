@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: nucleo-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ultimamilla_nucleo
+    username: ultimamilla
+    password: ultimamilla
+  jpa:
+    hibernate:
+      ddl-auto: validate # el esquema se crea/versiona con migraciones, no con auto-DDL
+    open-in-view: false # sin capa de vista — evita sesiones JPA abiertas fuera de la transacción
+
+server:
+  port: 8081

@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: nucleo-postgres
+    environment:
+      POSTGRES_DB: ultimamilla_nucleo
+      POSTGRES_USER: ultimamilla
+      POSTGRES_PASSWORD: ultimamilla
+    ports:
+      - "5432:5432"
+    volumes:
+      - nucleo_pgdata:/var/lib/postgresql/data
+
+volumes:
+  nucleo_pgdata:
