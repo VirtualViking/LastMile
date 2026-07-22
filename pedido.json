@@ -1,0 +1,18 @@
+﻿{
+    "direccionOrigen":  {
+                            "latitud":  4.5339,
+                            "longitud":  -75.6811,
+                            "calle":  "Cra 10 #20-30",
+                            "ciudad":  "Armenia"
+                        },
+    "distanciaKm":  5,
+    "tipoTarifa":  "ESTANDAR",
+    "direccionDestino":  {
+                             "latitud":  4.5389,
+                             "longitud":  -75.675,
+                             "calle":  "Cll 5 #8-12",
+                             "ciudad":  "Armenia"
+                         },
+    "comercioId":  "8c70e060-9af2-46a4-90da-12eac486cbd8",
+    "clienteId":  "a20eea1c-fa93-4d51-a789-0bc3fd23374b"
+}

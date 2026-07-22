@@ -14,6 +14,7 @@ import com.ultimamilla.nucleo.domain.model.UsuarioId;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,6 +54,7 @@ public class PedidoController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('CLIENTE')")
     public ResponseEntity<PedidoResponse> crear(@Valid @RequestBody CrearPedidoRequest request) {
         CrearPedidoComando comando = new CrearPedidoComando(
             new UsuarioId(request.clienteId()),
@@ -67,6 +69,7 @@ public class PedidoController {
     }
 
     @PostMapping("/{id}/asignar-repartidor")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<PedidoResponse> asignarRepartidor(@PathVariable UUID id,
                                                               @Valid @RequestBody AsignarRepartidorRequest request) {
         Pedido pedido = asignarRepartidorUseCase.ejecutar(new PedidoId(id), new UsuarioId(request.repartidorId()));

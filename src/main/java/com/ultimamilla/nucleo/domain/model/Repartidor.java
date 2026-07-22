@@ -38,4 +38,16 @@ public final class Repartidor extends Usuario {
     public void marcarInactivo() {
         this.disponibilidad = DisponibilidadRepartidor.INACTIVO;
     }
+
+    /**
+     * Reconstruye un repartidor ya existente desde persistencia, con su disponibilidad
+     * real — a diferencia del constructor normal, que siempre arranca en DISPONIBLE.
+     * Lo usa exclusivamente el mapper de infraestructura.
+     */
+    public static Repartidor reconstruir(UsuarioId id, String nombre, String email,
+                                          DisponibilidadRepartidor disponibilidad) {
+        Repartidor repartidor = new Repartidor(id, nombre, email);
+        repartidor.disponibilidad = disponibilidad;
+        return repartidor;
+    }
 }

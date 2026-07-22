@@ -1,5 +1,7 @@
 package com.ultimamilla.nucleo.infrastructure.in.web;
 
+import com.ultimamilla.nucleo.application.exception.CredencialesInvalidasException;
+import com.ultimamilla.nucleo.application.exception.EmailYaRegistradoException;
 import com.ultimamilla.nucleo.application.exception.PedidoNoEncontradoException;
 import com.ultimamilla.nucleo.domain.exception.TransicionEstadoInvalidaException;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(TransicionEstadoInvalidaException.class)
     public ResponseEntity<ErrorResponse> manejarTransicionInvalida(TransicionEstadoInvalidaException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(ex.getMessage()));
+    }
+
+    @ExceptionHandler(EmailYaRegistradoException.class)
+    public ResponseEntity<ErrorResponse> manejarEmailDuplicado(EmailYaRegistradoException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(ex.getMessage()));
+    }
+
+    @ExceptionHandler(CredencialesInvalidasException.class)
+    public ResponseEntity<ErrorResponse> manejarCredencialesInvalidas(CredencialesInvalidasException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse(ex.getMessage()));
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

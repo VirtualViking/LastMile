@@ -7,8 +7,19 @@ spring:
     password: ultimamilla
   jpa:
     hibernate:
-      ddl-auto: validate
-    open-in-view: false
+      ddl-auto: validate # el esquema se crea/versiona con migraciones, no con auto-DDL
+    open-in-view: false # sin capa de vista — evita sesiones JPA abiertas fuera de la transacción
 
 server:
   port: 8090
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+app:
+  jwt:
+    # Secreto de DESARROLLO únicamente — en producción debe venir de una variable de
+    # entorno o de AWS Secrets Manager, nunca hardcodeado ni commiteado.
+    secret: "cambia-este-secreto-en-produccion-usando-una-variable-de-entorno-o-secrets-manager"
+    expiracion-minutos: 60

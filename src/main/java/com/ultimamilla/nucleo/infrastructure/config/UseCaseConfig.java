@@ -5,15 +5,22 @@ import com.ultimamilla.nucleo.application.port.in.CancelarPedidoUseCase;
 import com.ultimamilla.nucleo.application.port.in.ConsultarPedidoUseCase;
 import com.ultimamilla.nucleo.application.port.in.CrearPedidoUseCase;
 import com.ultimamilla.nucleo.application.port.in.IniciarEnvioUseCase;
+import com.ultimamilla.nucleo.application.port.in.IniciarSesionUseCase;
 import com.ultimamilla.nucleo.application.port.in.MarcarEntregadoUseCase;
+import com.ultimamilla.nucleo.application.port.in.RegistrarUsuarioUseCase;
 import com.ultimamilla.nucleo.application.port.out.EventPublisherPort;
+import com.ultimamilla.nucleo.application.port.out.PasswordHasherPort;
 import com.ultimamilla.nucleo.application.port.out.PedidoRepositoryPort;
+import com.ultimamilla.nucleo.application.port.out.TokenProviderPort;
+import com.ultimamilla.nucleo.application.port.out.UsuarioRepositoryPort;
 import com.ultimamilla.nucleo.application.usecase.AsignarRepartidorUseCaseImpl;
 import com.ultimamilla.nucleo.application.usecase.CancelarPedidoUseCaseImpl;
 import com.ultimamilla.nucleo.application.usecase.ConsultarPedidoUseCaseImpl;
 import com.ultimamilla.nucleo.application.usecase.CrearPedidoUseCaseImpl;
 import com.ultimamilla.nucleo.application.usecase.IniciarEnvioUseCaseImpl;
+import com.ultimamilla.nucleo.application.usecase.IniciarSesionUseCaseImpl;
 import com.ultimamilla.nucleo.application.usecase.MarcarEntregadoUseCaseImpl;
+import com.ultimamilla.nucleo.application.usecase.RegistrarUsuarioUseCaseImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -54,5 +61,18 @@ public class UseCaseConfig {
     @Bean
     public ConsultarPedidoUseCase consultarPedidoUseCase(PedidoRepositoryPort pedidoRepository) {
         return new ConsultarPedidoUseCaseImpl(pedidoRepository);
+    }
+
+    @Bean
+    public RegistrarUsuarioUseCase registrarUsuarioUseCase(UsuarioRepositoryPort usuarioRepository,
+                                                            PasswordHasherPort passwordHasher) {
+        return new RegistrarUsuarioUseCaseImpl(usuarioRepository, passwordHasher);
+    }
+
+    @Bean
+    public IniciarSesionUseCase iniciarSesionUseCase(UsuarioRepositoryPort usuarioRepository,
+                                                      PasswordHasherPort passwordHasher,
+                                                      TokenProviderPort tokenProvider) {
+        return new IniciarSesionUseCaseImpl(usuarioRepository, passwordHasher, tokenProvider);
     }
 }
